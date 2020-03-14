@@ -1,0 +1,295 @@
+﻿
+Global variables initialized to zero to keep track of certain values:
+
+entryNodeCounter = 0;
+clearedListCounter = 0;
+removedNodeCounter = 0;
+theSmallestLongitude = 0.0;
+theLargestLongitude = 0.0;
+
+
+
+
+Function: int addNode(arguments)
+
+	newNode = arguments;
+
+	~ check if the list is empty
+	if head = empty
+	head = newNode;
+	entryNodeCounter++;
+	newNodePointer = nullSpace
+	return entryNodeCounter;
+	~
+	
+	//otherwise if the list is not empty
+
+	newPointerNode = head;
+
+	~until: newPointerNode NOT null
+		continue...
+		newPointerNode = newPointerNode to the next
+	~
+	out loop
+
+	newPointerNode = newNode;
+	newNode points to null;
+	entryNodeCounter++;
+	return entryNodeCounter;
+
+Function: int remNode(Argument)
+
+	// check if the list is empty
+	if head = empty
+	return -1;
+
+	//chech if the the list has only one node
+	
+	~if Argument = head(name)
+		Head = null
+		entryCount
+		return 0;
+	~
+
+	//otherwise
+	newPointer = head;
+	newFollower = head;
+
+	~untill: newPointerNext NOT null
+		continue...
+		newPointer = newPointer to the next;
+		
+		//check if the name that needs to be removed match 
+		~if: newPointer(name) = Argument(name)
+		newFollower_Next = newFollower_Next_Next
+		removedNodeCounter++;
+		entryNodeCounter--;	
+		~return removedNodeCounter;
+
+		newFollower = newFollower to the next;
+
+	~
+	out loop
+	return -1;	
+
+Function: int addSortedNode(Arguments)
+	
+	
+	nerwNode -> (Arguments);
+	newPointerNode -> head;
+	newFollowerNode -> head;
+	
+
+	//Empity list case
+	check: ~if head = empty
+		head -> newNode;
+		entryNodeCount =0;
+		theSmallestLongitude  = head(longitude);
+		theLargestLongitude  = head(longitude);
+		~return entryNodeCount;
+		
+	// updating theSmallestLongitude and theLargestLongitude
+	~if: Argumenr(longitude) >= theLargestLongitude
+
+		current theLargestLongitude = Argumenr(longitude);
+
+	else: Argumenr(longitude) <= theSmallestLongitude  
+			
+		current theSmallestLongitude  = Argumenr(longitude);
+	~	
+
+	// taking care of the firsT and last node edge cases
+	// before parsing through the middle nodes
+	~if: Argumenr(longitude) <= theSmallestLongitude
+		// this means the longitude passes as argument
+		// either less than or equal to the first node longitude
+		// Therefore: the newNode can be store as the head of the list
+		
+		newNode_next = head;
+		head = node;
+		entryNodeCount++;
+		return entryNodeCount;
+
+	else: Argumenr(longitude) >= theLargestLongitude
+		// this means the longitude passes as argument
+		// either greater than or equal to the last node longitude
+		// Therefore: the newNode can be store as the last node in the list
+		
+		~untill: newPointer_Next NOT null
+			newPointer = newPointer_Next;
+		~
+		out loop
+
+		newPointer_Next = newNode;
+		newNode = null;
+		entryNodeCount++;
+	~	return entryNodeCount;
+		
+	// single node case
+	// if the list has only one node,
+	// the newNode has to store either to the left or right
+	~Until: head_next = null
+	
+		~if: head(longitude) > Argument(longitude)
+			//update the smallest and largest longitude value
+
+			current theSmallestLongitude  = Argumenr(longitude);
+			
+
+			newNode_next = head;
+			entryNodeCount++;
+			return entryNodeCount;
+		else:
+
+			current theLargestLongitude = head(longitude);
+			head_next = newNode;
+			newNode = null;
+			entryNodeCount++;
+			return entryNodeCount;
+		~
+
+	// taking care of the one or more node(s) that are the largest and equal from the list
+
+	~Until: head NOT null
+	
+		check and Update: the Argumenr(longitude) by comparing with the current
+		// theSmallestLongitude   and theLargestLongitude 
+
+		if: current theSmallestLongitude > Argumenr(longitude)
+			update: current theSmallestLongitude = Argumenr(longitude)
+			newNode_next = head;
+			head = newNode;
+			entryNodeCount++;
+			return entryNodeCount;
+
+		else: if current theLargestLongitude < Argumenr(longitude)
+			update: current theLargestLongitude = Argumenr(longitude)
+			//Parse: through the list until reachs to null 
+
+			~untill: newPointer_Next NOT null
+				newPointer = newPointer_Next;
+			~
+			out loop
+			
+			newPointer_Next  = newNode;
+			newNode_next = null;
+			entryNodeCount++;
+			return entryNodeCount;
+		// check if the current theLargestLongitude and Argumenr(longitude) are equal
+		else: if current theLargestLongitude = Argumenr(longitude)
+			// Parse: through the list until reachs to null
+			// if the theLargestLongitude is at the last node
+
+			~untill: newPointer_Next NOT null
+				newPointer = newPointer_Next;
+			~
+			out loop
+			
+			newPointer_Next  = newNode;
+			newNode_next = null;
+			entryNodeCount++;
+
+	// taking care of the one or more node(s) that are the largest and equal from the list
+    	// but, they are not the largest from the list
+	
+	// update pointer and assign new resrving node(that holds temporary node)
+
+	newPointerNode -> head;
+	newFollowerNode -> head;
+	newReserveNode -> Empty;
+
+	~Until: newPointerNode NOT null
+	
+		newPointerNode  = newPointerNode _next;
+
+		//check the Argument(longitude)
+		~if: newFollowerNode < Argument(longitude) AND newPointerNode  > Argument(longitude)
+		// this means, the Argument(longitude) will be stored in between 
+		// newFollowerNode  and newPointerNode  
+		
+		newFollowerNode_next = newNode;
+		newNode_next = newPointerNode;
+		newNode_next = null;
+		~entryNodeCount++;
+		
+		// updating the follower node 
+		newFollowerNode = newFollowerNode_next;
+		
+		// now, before the program go back to another loop
+		// it will check if the newFollowerNode, newPointerNode and Argument(longitude)
+		// happen to have equal longitude value
+		// if this happen, the program has to enter another while loop
+		// from the current position untill it gets to the next bigger longitude value
+		// by assuming there might be another node that have equal longitude value down the line
+
+			~Untill: newPointerNode _next(longitude) < Argument(longitude)
+				newPointerNode = newPointerNode_next
+			~
+			out loop
+		// by now the current newPointerNode _next is pointing to the next node that has bigger longitude value
+		// The 
+		
+		newReserveNode  = newPointerNode_next;
+	~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
