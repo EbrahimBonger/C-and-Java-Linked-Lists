@@ -1,8 +1,5 @@
 /* 
-   Student information:
    Author: Ebrahim Bonger
-   GWID: G35344397
-   GWNetID: Ebrahim5@gwu.edu
    Project1 java version
 */
 

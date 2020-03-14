@@ -1,14 +1,4 @@
 ﻿
-Global variables initialized to zero to keep track of certain values:
-
-entryNodeCounter = 0;
-clearedListCounter = 0;
-removedNodeCounter = 0;
-theSmallestLongitude = 0.0;
-theLargestLongitude = 0.0;
-
-
-
 
 Function: int addNode(arguments)
 
