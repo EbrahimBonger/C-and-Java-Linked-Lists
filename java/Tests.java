@@ -1,6 +1,6 @@
 public class Tests {
 
-  
+  // Testing intellij version control
   public static void addTestSimple() {
     LList list = new LList();
     int i;
